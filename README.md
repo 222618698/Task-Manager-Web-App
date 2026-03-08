@@ -98,3 +98,19 @@ Open **http://localhost:4200** in your browser. The Angular app communicates wit
 | Backend  | Flask 3 (Python)  |
 | Styling  | Custom CSS        |
 | Icons    | Font Awesome 6    |
+
+---
+
+## Screenshots
+
+### Dashboard & Stats
+![Dashboard](screenshots/dashboard.png)
+
+### Add New Task
+![Add Task](screenshots/add-task.png)
+
+### Task List with Filters
+![Task List](screenshots/task-list.png)
+
+### API Response
+![API Response](screenshots/api-response.png)
