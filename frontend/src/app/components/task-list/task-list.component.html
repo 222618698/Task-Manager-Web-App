@@ -1,0 +1,50 @@
+<div class="list-card">
+  <div class="list-header">
+    <h2><i class="fas fa-list"></i> Tasks</h2>
+    <div class="filter-tabs">
+      <button
+        *ngFor="let f of ['all', 'pending', 'completed']"
+        [class.active]="filter === f"
+        (click)="setFilter($any(f))"
+        class="filter-btn"
+      >
+        {{ f | titlecase }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="loading && tasks.length === 0" class="empty-state">
+    <i class="fas fa-spinner fa-spin"></i>
+    <p>Loading tasks...</p>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && filteredTasks.length === 0" class="empty-state">
+    <i class="fas fa-inbox"></i>
+    <p>No tasks found</p>
+  </div>
+
+  <!-- Task items -->
+  <ul class="task-list">
+    <li *ngFor="let task of filteredTasks" class="task-item" [class.completed]="task.status === 'completed'">
+      <div class="task-left">
+        <button class="check-btn" (click)="toggleStatus(task)" [title]="task.status === 'pending' ? 'Mark complete' : 'Mark pending'">
+          <i class="fas" [ngClass]="task.status === 'completed' ? 'fa-check-circle' : 'fa-circle'"></i>
+        </button>
+        <div class="task-details">
+          <span class="task-title">{{ task.title }}</span>
+          <span class="task-desc" *ngIf="task.description">{{ task.description }}</span>
+          <div class="task-meta">
+            <span class="badge" [ngClass]="getPriorityClass(task.priority)">{{ task.priority }}</span>
+            <span class="date">{{ task.created_at | date: 'short' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="delete-btn" (click)="deleteTask(task)" title="Delete task">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </li>
+  </ul>
+</div>
